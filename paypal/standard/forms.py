@@ -102,14 +102,14 @@ class PayPalPaymentsForm(forms.Form):
     def render(self):
         return mark_safe(u"""<form action="%s" method="post">
     %s
-    <input type="image" src="%s" border="0" name="submit" alt="Buy it Now" />
+    <input type="image" src="%s" border="0" name="submit" />
 </form>""" % (POSTBACK_ENDPOINT, self.as_p(), self.get_image()))
         
         
     def sandbox(self):
         return mark_safe(u"""<form action="%s" method="post">
     %s
-    <input type="image" src="%s" border="0" name="submit" alt="Buy it Now" />
+    <input type="image" src="%s" border="0" name="submit" />
 </form>""" % (SANDBOX_POSTBACK_ENDPOINT, self.as_p(), self.get_image()))
         
     def get_image(self):
