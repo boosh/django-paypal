@@ -95,6 +95,16 @@ class PayPalPaymentsForm(forms.Form):
     no_shipping = forms.ChoiceField(widget=forms.HiddenInput(), choices=SHIPPING_CHOICES, 
         initial=SHIPPING_CHOICES[0][0])
 
+    # personalisation fields
+    first_name = forms.CharField(widget=ValueHiddenInput())
+    last_name = forms.CharField(widget=ValueHiddenInput())
+    email = forms.CharField(widget=ValueHiddenInput())
+    address1 = forms.CharField(widget=ValueHiddenInput())
+    address2 = forms.CharField(widget=ValueHiddenInput())
+    city = forms.CharField(widget=ValueHiddenInput())
+    country = forms.CharField(widget=ValueHiddenInput())
+    zip = forms.CharField(widget=ValueHiddenInput())
+
     def __init__(self, button_type="buy", *args, **kwargs):
         super(PayPalPaymentsForm, self).__init__(*args, **kwargs)
         self.button_type = button_type
