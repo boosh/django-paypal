@@ -10,7 +10,7 @@ from paypal.standard.pdt.forms import PayPalPDTForm
 @require_GET
 def pdt(request, item_check_callable=None, template="pdt/pdt.html", context=None):
     """Payment data transfer implementation: http://tinyurl.com/c9jjmw"""
-    context = context or {}
+    context = context or RequestContext(request)
     pdt_obj = None
     txn_id = request.GET.get('tx')
     failed = False
@@ -44,7 +44,7 @@ def pdt(request, item_check_callable=None, template="pdt/pdt.html", context=None
                 # The PDT object gets saved during verify
                 pdt_obj.verify(item_check_callable)
     else:
-        pass # we ignore any PDT requests that don't have a transaction id
+        failed = True
  
     context.update({"failed":failed, "pdt_obj":pdt_obj})
-    return render_to_response(template, context, RequestContext(request))
+    return render_to_response(template, context)
